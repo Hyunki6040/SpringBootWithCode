@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h1 th:text="${result}"></h1>
+    <h1 th:text="${dto}"></h1>
+
+    <script th:inline="javascript">
+
+        var msg = [[${result}]];
+        var dto = [[${dto}]]; //JSON 문자열 포맷
+        var dto_obj = JSON.parse('\"'+dto+'\"'); //javaScript 객체로 변환해서 사용하고자 할 때
+    </script>
+</body>
+</html>
