@@ -25,7 +25,7 @@ public class SampleController {
 
     }
 
-    @GetMapping({"/ex2"}) // '{' 하나 이상의 URL을 지정할 수 있다.
+    @GetMapping({"/ex2", "/exLink"}) // '{' 하나 이상의 URL을 지정할 수 있다.
     public void exModel(Model model){
 
         List<SampleDTO> list = IntStream.rangeClosed(1,20).asLongStream().
