@@ -56,8 +56,23 @@
 <!--th:block = 별도의 태그(th:text, th:value)가 필요하지 않음-->
   <ul>
     <th:block th:each="dto: ${list}">
-      <li th:test="${dto.sno % 5 == 0}?${dto.sno}:${dto.first}"></li>
+      <li th:text="${dto.sno % 5 == 0}?${dto.sno}:${dto.first}"></li>
     </th:block>
+  </ul>
+
+
+<!--#numbers 숫자 포멧팅-->
+  <ul>
+      <li th:each="dto : ${list}">
+        [[${#numbers.formatInteger(dto.sno,5)}]]
+      </li>
+  </ul>
+
+<!--thymeleaf-extras-java8time dependency를 활용한 LocalDateTime 처리-->
+  <ul>
+    <li th:each="dto : ${list}">
+      [[${dto.sno}]]  ---  [[${#temporals.format(dto.regTime, 'yyyy/MM/dd')}]]
+    </li>
   </ul>
 
 </body>
