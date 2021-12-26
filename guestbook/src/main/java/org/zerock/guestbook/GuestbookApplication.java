@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-//AuditingEntityListener 활성화
+//AuditingEntityListener
+// 활성화
 @EnableJpaAuditing
 public class GuestbookApplication {
 
