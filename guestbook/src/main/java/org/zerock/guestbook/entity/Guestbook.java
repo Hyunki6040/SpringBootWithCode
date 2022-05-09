@@ -4,16 +4,16 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
-@Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity //이 클래스는 JPA로 관리되는 엔티티 객체
+@Getter //Lombok Getter Method 생성
+@Builder //객체를 생성 가능
+@AllArgsConstructor //컴파일 에러 처리
+@NoArgsConstructor //컴파일 에러 처리
 @ToString
 public class Guestbook extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id //PK
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //PK를 자동으로 생성. (Oracle- 번호 table, Mysql - A.I)
     private Long gno;
 
     @Column(length = 100, nullable = false)
@@ -25,12 +25,4 @@ public class Guestbook extends BaseEntity{
     @Column(length = 50, nullable = false)
     private String writer;
 
-    //Setter를 만들지 않는 것이 권장 => why? 엔티티 객체가 애플리케이션 내부에서 변경되면 JPA를 관리하는 쪽이 복잡
-    //필요에 따라서 가능
-    public void changeTitle(String title){
-        this.title = title;
-    }
-    public void changeContent(String content){
-        this.content = content;
-    }
 }

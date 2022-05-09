@@ -35,6 +35,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-#DB 정보 가림
-src/main/resources/application.properties
