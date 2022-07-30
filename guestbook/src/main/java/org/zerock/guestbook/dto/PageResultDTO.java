@@ -46,10 +46,10 @@ public class PageResultDTO<DTO, EN>{ //제네릭 타입, DTO와 Entity
     private void makePageList(Pageable pageable){
 
         this.page = pageable.getPageNumber() + 1; //0부터 시작하므로 1을 추가
-        this.page = pageable.getPageSize(); //총 페이지 수
+        this.size = pageable.getPageSize(); //총 페이지 수
 
         //temp end page
-        int tempEnd = (int)(Math.ceil(page/10.0))  * 10; //끝 페이지수 구하기. (페이지수/10)후 소수점 올림
+        int tempEnd = (int)(Math.ceil(page/10.0)) * 10; //끝 페이지수 구하기. (페이지수/10)후 소수점 올림
 
         start = tempEnd - 9;
 
@@ -58,6 +58,8 @@ public class PageResultDTO<DTO, EN>{ //제네릭 타입, DTO와 Entity
         end = totalPage > tempEnd ? tempEnd: totalPage; //총 페이지수와 끝 페이지수 비교.
 
         next = totalPage > tempEnd; //다음버튼 여부
+
+        System.out.println("page : " + page+ "\ntempEnd : " + tempEnd + "\nstart : " + start + "\n prev : " + prev + "\n end : " + end + "\n next : " + next);
 
         pageList = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
     }
