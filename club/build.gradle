@@ -28,9 +28,13 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    //providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+    
+    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client' //mariadb 드라이브
+    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5' //thymleaf 확장 플러그인
+    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time'
 }
 
 tasks.named('test') {
