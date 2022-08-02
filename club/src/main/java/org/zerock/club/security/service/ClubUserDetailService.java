@@ -17,19 +17,19 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor // repository 주입성 추
 public class ClubUserDetailService implements UserDetailsService{
 	
-	private final ClubMemberRepository clubMemberRepository;
+	private final ClubMemberRepository clubMemberRepository; //주입성 추가
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{ //사용자가 존재하지 않으면 Exception 처리
 		
 		log.info("ClubUserDetailsService loadUserByUsername " + username);
 		
 		Optional<ClubMember> result = clubMemberRepository.findByEmail(username, false);
 		
-		if(result.isPresent()) {
+		if(!result.isPresent()) {
 			throw new UsernameNotFoundException("Check Email or Social ");
 		}
 		
@@ -38,12 +38,12 @@ public class ClubUserDetailService implements UserDetailsService{
 		log.info("--------------------");
 		log.info(clubMember);
 		
-		ClubAuthMemberDTO clubAuthMember = new ClubAuthMemberDTO(
+		ClubAuthMemberDTO clubAuthMember = new ClubAuthMemberDTO( // UserDetails 타입으로 처리하기 위해서 타입 변
 				clubMember.getEmail(),
 				clubMember.getPassword(),
 				clubMember.isFromSocial(),
 				clubMember.getRoleSet().stream()
-					.map(role -> new SimpleGrantedAuthority("ROLE_"+role.name())).collect(Collectors.toSet())
+					.map(role -> new SimpleGrantedAuthority("ROLE_"+role.name())).collect(Collectors.toSet()) //접두어 사용해 스프링 시큐리티에서 사용하는 SimpleGrantedAuthority로 변
 		);
 		
 		clubAuthMember.setName(clubMember.getName());
